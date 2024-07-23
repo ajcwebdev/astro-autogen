@@ -1,4 +1,4 @@
-export type SiteConfig = {
+export interface SiteConfig {
 	author: string;
 	title: string;
 	description: string;
@@ -12,73 +12,74 @@ export type SiteConfig = {
 		link: string;
 		pingback?: string;
 	};
-};
+	sortPostsByUpdatedDate: boolean;
+}
 
-export type PaginationLink = {
+export interface PaginationLink {
 	url: string;
 	text?: string;
 	srLabel?: string;
-};
+}
 
-export type SiteMeta = {
+export interface SiteMeta {
 	title: string;
 	description?: string;
 	ogImage?: string | undefined;
 	articleDate?: string | undefined;
-};
+}
 
 /** Webmentions */
-export type WebmentionsFeed = {
+export interface WebmentionsFeed {
 	type: string;
 	name: string;
 	children: WebmentionsChildren[];
-};
+}
 
-export type WebmentionsCache = {
-	lastFetched: string | null;
+export interface WebmentionsCache {
+	lastFetched: null | string;
 	children: WebmentionsChildren[];
-};
+}
 
-export type WebmentionsChildren = {
+export interface WebmentionsChildren {
 	type: string;
 	author: Author | null;
 	url: string;
-	published?: string | null;
+	published?: null | string;
 	"wm-received": string;
 	"wm-id": number;
 	"wm-source": string;
 	"wm-target": string;
 	"wm-protocol": string;
-	syndication?: string[] | null;
+	syndication?: null | string[];
 	content?: Content | null;
 	"mention-of": string;
 	"wm-property": string;
 	"wm-private": boolean;
 	rels?: Rels | null;
-	name?: string | null;
-	photo?: string[] | null;
+	name?: null | string;
+	photo?: null | string[];
 	summary?: Summary | null;
-};
+}
 
-export type Author = {
+export interface Author {
 	type: string;
 	name: string;
 	photo: string;
 	url: string;
-};
+}
 
-export type Content = {
+export interface Content {
 	"content-type": string;
 	value: string;
 	html: string;
 	text: string;
-};
+}
 
-export type Rels = {
+export interface Rels {
 	canonical: string;
-};
+}
 
-export type Summary = {
+export interface Summary {
 	"content-type": string;
 	value: string;
-};
+}
