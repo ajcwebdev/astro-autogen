@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config"
 import fs from "fs"
 import mdx from "@astrojs/mdx"
-import tailwind from "@astrojs/tailwind"
 import sitemap from "@astrojs/sitemap"
 import remarkUnwrapImages from "remark-unwrap-images"
 import rehypeExternalLinks from "rehype-external-links"
@@ -34,15 +33,9 @@ export default defineConfig({
 	integrations: [
 		expressiveCode(expressiveCodeOptions),
 		icon(),
-		tailwind({
-			applyBaseStyles: false,
-		}),
 		sitemap(),
 		mdx(),
 	],
-	image: {
-		domains: ["webmention.io"],
-	},
 	// https://docs.astro.build/en/guides/prefetch/
 	prefetch: true,
 	vite: {

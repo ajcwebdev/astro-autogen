@@ -8,10 +8,6 @@ export interface SiteConfig {
 		locale: string | string[] | undefined;
 		options: Intl.DateTimeFormatOptions;
 	};
-	webmentions?: {
-		link: string;
-		pingback?: string;
-	};
 	sortPostsByUpdatedDate: boolean;
 }
 
@@ -26,39 +22,6 @@ export interface SiteMeta {
 	description?: string;
 	ogImage?: string | undefined;
 	articleDate?: string | undefined;
-}
-
-/** Webmentions */
-export interface WebmentionsFeed {
-	type: string;
-	name: string;
-	children: WebmentionsChildren[];
-}
-
-export interface WebmentionsCache {
-	lastFetched: null | string;
-	children: WebmentionsChildren[];
-}
-
-export interface WebmentionsChildren {
-	type: string;
-	author: Author | null;
-	url: string;
-	published?: null | string;
-	"wm-received": string;
-	"wm-id": number;
-	"wm-source": string;
-	"wm-target": string;
-	"wm-protocol": string;
-	syndication?: null | string[];
-	content?: Content | null;
-	"mention-of": string;
-	"wm-property": string;
-	"wm-private": boolean;
-	rels?: Rels | null;
-	name?: null | string;
-	photo?: null | string[];
-	summary?: Summary | null;
 }
 
 export interface Author {
