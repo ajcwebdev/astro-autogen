@@ -1,14 +1,14 @@
-import { defineConfig } from "astro/config";
-import fs from "fs";
-import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
-import sitemap from "@astrojs/sitemap";
-import remarkUnwrapImages from "remark-unwrap-images";
-import rehypeExternalLinks from "rehype-external-links";
-import { remarkReadingTime } from "./src/utils/remark-reading-time";
-import icon from "astro-icon";
-import expressiveCode from "astro-expressive-code";
-import { expressiveCodeOptions } from "./src/site.config";
+import { defineConfig } from "astro/config"
+import fs from "fs"
+import mdx from "@astrojs/mdx"
+import tailwind from "@astrojs/tailwind"
+import sitemap from "@astrojs/sitemap"
+import remarkUnwrapImages from "remark-unwrap-images"
+import rehypeExternalLinks from "rehype-external-links"
+import { remarkReadingTime } from "./src/utils/remark-reading-time"
+import icon from "astro-icon"
+import expressiveCode from "astro-expressive-code"
+import { expressiveCodeOptions } from "./src/site.config"
 
 // https://astro.build/config
 export default defineConfig({
@@ -51,7 +51,7 @@ export default defineConfig({
 			exclude: ["@resvg/resvg-js"],
 		},
 	},
-});
+})
 
 function rawFonts(ext: Array<string>) {
 	return {
@@ -60,12 +60,12 @@ function rawFonts(ext: Array<string>) {
 		// @ts-ignore:next-line
 		transform(_, id) {
 			if (ext.some((e) => id.endsWith(e))) {
-				const buffer = fs.readFileSync(id);
+				const buffer = fs.readFileSync(id)
 				return {
 					code: `export default ${JSON.stringify(buffer)}`,
 					map: null,
-				};
+				}
 			}
 		},
-	};
+	}
 }
