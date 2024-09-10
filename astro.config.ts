@@ -2,34 +2,13 @@ import { defineConfig } from "astro/config"
 import fs from "fs"
 import mdx from "@astrojs/mdx"
 import sitemap from "@astrojs/sitemap"
-import remarkUnwrapImages from "remark-unwrap-images"
-import rehypeExternalLinks from "rehype-external-links"
-import { remarkReadingTime } from "./src/utils/remark-reading-time"
 import icon from "astro-icon"
 import expressiveCode from "astro-expressive-code"
 import { expressiveCodeOptions } from "./src/site.config"
 
 // https://astro.build/config
 export default defineConfig({
-	// ! Please remember to replace the following site property with your own domain
-	site: "https://astro-cactus.chriswilliams.dev/",
-	markdown: {
-		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
-		rehypePlugins: [
-			[
-				rehypeExternalLinks,
-				{
-					target: "_blank",
-					rel: ["nofollow, noopener, noreferrer"],
-				},
-			],
-		],
-		remarkRehype: {
-			footnoteLabelProperties: {
-				className: [""],
-			},
-		},
-	},
+	site: "https://autoshow.sh/",
 	integrations: [
 		expressiveCode(expressiveCodeOptions),
 		icon(),

@@ -1,18 +1,16 @@
 ---
-import type { SiteMeta } from "@/types";
+import type { SiteMeta } from "@/types"
+import { siteConfig } from "@/site-config"
+import "../styles/global.css"
 
-import { siteConfig } from "@/site-config";
+type Props = SiteMeta
 
-import "../styles/global.css";
+const { articleDate, description, ogImage, title } = Astro.props
 
-type Props = SiteMeta;
-
-const { articleDate, description, ogImage, title } = Astro.props;
-
-const titleSeparator = "•";
-const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url).href;
+const titleSeparator = "•"
+const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url).href
 ---
 
 <meta charset="utf-8" />

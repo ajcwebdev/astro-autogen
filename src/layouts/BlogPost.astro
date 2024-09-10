@@ -1,29 +1,27 @@
 ---
-import type { CollectionEntry } from "astro:content";
-
-import BlogHero from "@/components/blog/Hero.astro";
-import TOC from "@/components/blog/TOC.astro";
-
-import BaseLayout from "./Base.astro";
+import type { CollectionEntry } from "astro:content"
+import BlogHero from "@/components/blog/Hero.astro"
+import TOC from "@/components/blog/TOC.astro"
+import BaseLayout from "./Base.astro"
 
 interface Props {
-	post: CollectionEntry<"post">;
+	post: CollectionEntry<"post">
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props
 const {
 	data: { description, ogImage, publishDate, title, updatedDate },
 	slug,
-} = post;
-const socialImage = ogImage ?? `/og-image/${slug}.png`;
-const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
-const { headings } = await post.render();
+} = post
+const socialImage = ogImage ?? `/og-image/${slug}.png`
+const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString()
+const { headings } = await post.render()
 ---
 
 <BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
 	<div>
 		{!!headings.length && <TOC headings={headings} />}
-		<article data-pagefind-body>
+		<article>
 			<div id="blog-hero"><BlogHero content={post} /></div>
 			<div>
 				<slot />
@@ -49,20 +47,20 @@ const { headings } = await post.render();
 </BaseLayout>
 
 <script>
-	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
-	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement;
+	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement
+	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement
 
 	function callback(entries: IntersectionObserverEntry[]) {
 		entries.forEach((entry) => {
 			// only show the scroll to top button when the heading is out of view
-			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
-		});
+			scrollBtn.dataset.show = (!entry.isIntersecting).toString()
+		})
 	}
 
 	scrollBtn.addEventListener("click", () => {
-		document.documentElement.scrollTo({ behavior: "smooth", top: 0 });
-	});
+		document.documentElement.scrollTo({ behavior: "smooth", top: 0 })
+	})
 
-	const observer = new IntersectionObserver(callback);
-	observer.observe(targetHeader);
+	const observer = new IntersectionObserver(callback)
+	observer.observe(targetHeader)
 </script>

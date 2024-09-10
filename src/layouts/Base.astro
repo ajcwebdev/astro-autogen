@@ -1,18 +1,19 @@
 ---
-import type { SiteMeta } from "@/types";
-
-import BaseHead from "@/components/BaseHead.astro";
-import Footer from "@/components/layout/Footer.astro";
-import Header from "@/components/layout/Header.astro";
-import { siteConfig } from "@/site-config";
+import type { SiteMeta } from "@/types"
+import BaseHead from "@/components/BaseHead.astro"
+import { siteConfig } from "@/site-config"
+import { menuLinks } from "@/site-config"
 
 interface Props {
-	meta: SiteMeta;
+	meta: SiteMeta
 }
 
 const {
 	meta: { articleDate, description = siteConfig.description, ogImage, title },
-} = Astro.props;
+} = Astro.props
+
+const year = new Date().getFullYear()
+const url = new URL(Astro.request.url)
 ---
 
 <html color-mode="user" lang={siteConfig.lang}>
@@ -20,10 +21,33 @@ const {
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 	</head>
 	<body>
-		<Header />
+		<header id="main-header">
+			<div>
+			  <a aria-current={url.pathname === "/" ? "page" : false} href="/">
+				Autoshow.sh
+			  </a>
+			  <nav aria-label="Main menu" id="navigation-menu">
+				<ul>
+				  {
+					menuLinks.map((link) => (
+					  <li>
+						<a aria-current={url.pathname === link.path ? "page" : false} data-astro-prefetch href={link.path}>
+						  {link.title}
+						</a>
+					  </li>
+					))
+				  }
+				</ul>
+			  </nav>
+			</div>
+		</header>
 		<main id="main">
 			<slot />
 		</main>
-		<Footer />
+		<footer>
+			<div>
+				&copy; {siteConfig.author} {year}<br><span>Astro Autoshow</span>
+			</div>
+		</footer>
 	</body>
 </html>
